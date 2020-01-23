@@ -37,7 +37,7 @@ $con = mysqli_connect("localhost","root","","mychat") or die("Connection was not
 			";
 		
 		if(isset($_POST['add'])){
-			echo "<script>window.open('../home.php?user_name=$user_name','_self')</script>";
+			echo "<script>window.open('home.php?user_name=$user_name','_self')</script>";
 		}	
 		}
 		
