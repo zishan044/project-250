@@ -63,6 +63,34 @@ else{ ?>
 						$user_profile_image = $row_user['user_profile'];
 						}
 
+						if(isset($_POST['submit'])){
+							$msg = htmlentities($_POST['msg_content']);
+								
+							if($msg == ""){
+								echo"
+				
+								<div class='alert alert-danger'>
+								  <strong><center>Message was unable to send!</center></strong>
+								</div>
+				
+								";
+							}else if(strlen($msg) > 100){
+								echo"
+				
+								<div class='alert alert-danger'>
+								  <strong><center>Message is Too long! Use only 100 characters</center></strong>
+								</div>
+				
+								";
+							}
+							else{
+							$insert = "insert into users_chat(sender_username,receiver_username,msg_content,msg_status,msg_date) values ('$user_name','$username','$msg','unread',NOW())";
+							
+							$run_insert = mysqli_query($con,$insert);
+				
+							}
+						}
+
 						$total_messages = "select * from users_chat where (sender_username='$user_name' AND receiver_username='$username') OR (receiver_username='$user_name' AND sender_username='$username')"; 
 						$run_messages = mysqli_query($con,$total_messages); 
 						$total = mysqli_num_rows($run_messages);
@@ -155,33 +183,7 @@ else{ ?>
 		</div>
 	</div>
 	<?php
-		if(isset($_POST['submit'])){
-			$msg = htmlentities($_POST['msg_content']);
-				
-			if($msg == ""){
-				echo"
-
-				<div class='alert alert-danger'>
-				  <strong><center>Message was unable to send!</center></strong>
-				</div>
-
-				";
-			}else if(strlen($msg) > 100){
-				echo"
-
-				<div class='alert alert-danger'>
-				  <strong><center>Message is Too long! Use only 100 characters</center></strong>
-				</div>
-
-				";
-			}
-			else{
-			$insert = "insert into users_chat(sender_username,receiver_username,msg_content,msg_status,msg_date) values ('$user_name','$username','$msg','unread',NOW())";
-			
-			$run_insert = mysqli_query($con,$insert);
-
-			}
-		}
+		
 	?>
 
 	<script>
