@@ -26,7 +26,7 @@ $con = mysqli_connect("localhost","root","","mychat") or die("Connection was not
 			
 			echo "
 			<div class='card'>
-		      <img src='../$user_profile'>
+		      <img src='$user_profile'>
 		      <h1>$user_name</h1>
 		      <p class='title'>$country</p>
 		      <p>$gender</p>
